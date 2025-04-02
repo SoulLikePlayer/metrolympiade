@@ -1,0 +1,20 @@
+.header {
+  background: var(--primary-color);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-medium);
+}
+
+.nav {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.nav-link {
+  color: var(--text-inverted);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
