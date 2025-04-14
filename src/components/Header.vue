@@ -1,12 +1,24 @@
 <template>
   <header class="header">
     <nav>
-      <router-link to="/">Home</router-link>
+      <router-link to="/">Accueil</router-link>
+      <router-link to="/ranking">Classement</router-link>
+      
       <template v-if="!isAuthenticated">
-        <router-link to="/login">Se connecter</router-link>
-        <router-link to="/register">Créer un compte</router-link>
+        <router-link to="/login">Connexion</router-link>
+        <router-link to="/register">Inscription</router-link>
       </template>
-      <button v-else @click="handleLogout">Déconnexion</button>
+      
+      <template v-else>
+        <div class="dropdown">
+          <button class="dropdown-toggle">Mon compte</button>
+          <div class="dropdown-menu">
+            <router-link to="/team">Mon équipe</router-link>
+            <router-link to="/games">Mes matchs</router-link>
+            <button @click="handleLogout" class="btn-logout">Déconnexion</button>
+          </div>
+        </div>
+      </template>
     </nav>
   </header>
 </template>
@@ -23,3 +35,5 @@ const handleLogout = () => {
   router.push("/");
 };
 </script>
+
+<style scoped src="../assets/style/Header.css"></style>

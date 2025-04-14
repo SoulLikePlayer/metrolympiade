@@ -1,20 +1,134 @@
+/* header.css */
 .header {
-  background: var(--primary-color);
-  padding: var(--spacing-md);
-  box-shadow: var(--shadow-medium);
+  background-color: var(--bg-light);
+  box-shadow: var(--shadow-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.nav {
+.header nav {
   display: flex;
-  gap: var(--spacing-lg);
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--width-container);
+  margin: 0 auto;
+  padding: var(--spacing-md) var(--spacing-lg);
 }
 
-.nav-link {
+.header nav a {
+  color: var(--text-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  margin-right: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.header nav a:hover {
+  color: var(--primary-color);
+  background-color: rgba(30, 144, 255, 0.1);
+}
+
+.header nav a.router-link-active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Styles pour le bouton de déconnexion */
+.btn-logout {
+  background-color: var(--error-color);
   color: var(--text-inverted);
-  font-weight: bold;
-  text-decoration: none;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: 500;
+  margin-left: var(--spacing-sm);
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.btn-logout:hover {
+  background-color: darkred;
+}
+
+/* Styles pour le menu dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: 500;
+  font-family: var(--font-main);
+  font-size: inherit;
+}
+
+.dropdown-toggle:hover {
+  color: var(--primary-color);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--bg-light);
+  min-width: 200px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+  color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-md);
+  }
+
+  .header nav a, .btn-logout {
+    margin: var(--spacing-xs) 0;
+    display: block;
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    display: none;
+    width: 100%;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }

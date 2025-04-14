@@ -1,0 +1,90 @@
+.ranking-view {
+  max-width: var(--width-container);
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.ranking-view h1 {
+  font-family: var(--font-title);
+  color: var(--text-color);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-light);
+  box-shadow: var(--shadow-light);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.ranking-table thead {
+  background-color: var(--primary-color);
+  color: var(--text-inverted);
+}
+
+.ranking-table th {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: 600;
+  font-family: var(--font-title);
+}
+
+.ranking-table tbody tr {
+  border-bottom: var(--border-light);
+  transition: background-color 0.2s ease;
+}
+
+.ranking-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ranking-table tbody tr:hover {
+  background-color: rgba(30, 144, 255, 0.05);
+}
+
+.ranking-table td {
+  padding: var(--spacing-md);
+}
+
+.rank-cell {
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.team-cell {
+  font-weight: 500;
+}
+
+.points-cell {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Top 3 spécial */
+.ranking-table tr:nth-child(1) .rank-cell {
+  color: var(--secondary-color);
+  font-size: 1.1em;
+}
+
+.ranking-table tr:nth-child(2) .rank-cell {
+  color: var(--text-light);
+  font-size: 1.05em;
+}
+
+.ranking-table tr:nth-child(3) .rank-cell {
+  color: var(--warning-color);
+  font-size: 1.05em;
+}
+
+.loading-state {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--text-light);
+  font-style: italic;
+}
