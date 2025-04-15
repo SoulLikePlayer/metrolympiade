@@ -38,17 +38,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { createMatch } from '../api/matches';
 import { getActivities } from '../api/activities';
-import { getRanking } from '../api/ranking';
+import { getAllTeams } from '../api/teams';
 import { useAuth } from '../composables/useAuth';
 
 const { user } = useAuth();
 const router = useRouter();
 
 const form = ref({
+  team1Id: '',
   team2Id: '',
   activityId: '',
   startedAt: '',
@@ -60,15 +61,27 @@ const activities = ref([]);
 const teams = ref([]);
 const loading = ref(true);
 
+watch(() => form.value.team2Id, (newVal) => {
+  console.log('team2Id updated:', newVal);
+});
+
+watch(() => user.value?.team?.id, (newTeamId) => {
+  if (newTeamId) {
+    form.value.team1Id = newTeamId;
+  }
+}, { immediate: true });
+
 onMounted(async () => {
   try {
-    const [activitiesData, rankingData] = await Promise.all([
+    const [activitiesData, allTeams] = await Promise.all([
       getActivities(),
-      getRanking()
+      getAllTeams(user.value.token)
     ]);
-    
+
     activities.value = activitiesData;
-    teams.value = rankingData.map(item => ({ id: item.teamId, name: item.team }));
+    teams.value = allTeams
+      .filter(team => team.id !== user.value?.team?.id)
+      .map(team => ({ id: team.id, name: team.name }));
   } catch (error) {
     console.error('Error fetching data:', error);
   } finally {
@@ -77,6 +90,11 @@ onMounted(async () => {
 });
 
 const submitMatch = async () => {
+  console.log('Données envoyées:', form.value);
+  if (!form.value.team2Id) {
+    alert('Veuillez sélectionner un adversaire');
+    return;
+  }
   try {
     await createMatch(form.value, user.value.token);
     router.push('/games');
@@ -84,4 +102,5 @@ const submitMatch = async () => {
     console.error('Error creating match:', error);
   }
 };
+
 </script>

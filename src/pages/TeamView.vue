@@ -6,6 +6,7 @@
     
     <template v-else>
       <div class="form-group">
+       
         <label>Nom de l'équipe</label>
         <input type="text" v-model="team.name" required>
       </div>
@@ -45,6 +46,7 @@ const isNewTeam = ref(false);
 onMounted(async () => {
   try {
     const teamData = await getMyTeam(user.value.token);
+    console.log(teamData.id)
     if (teamData) {
       team.value = {
         name: teamData.name || user.value?.teamName || '',

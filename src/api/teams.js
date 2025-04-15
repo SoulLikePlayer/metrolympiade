@@ -28,3 +28,12 @@ export const updateTeam = async (teamData, token) => {
   });
   return response.data;
 };
+
+export const getAllTeams = async (token) => {
+  const response = await axios.get(`${API_URL}/teams`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data;
+};
