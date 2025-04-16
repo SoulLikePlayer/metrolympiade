@@ -1,17 +1,38 @@
 <template>
   <div class="container">
-    <h1>Mes matchs</h1>
-    <button @click="goToNewMatch" class="btn primary">Ajouter un match</button>
+    <div class="matches-header">
+      <h1>Mes matchs</h1>
+      <button @click="goToNewMatch" class="btn primary">
+        <i class="fas fa-plus"></i> Ajouter un match
+      </button>
+    </div>
     
     <div v-if="loading" class="loading">Chargement...</div>
-    <div v-else-if="matches.length === 0" class="empty-state">Aucun match enregistré</div>
+    
+    <div v-else-if="matches.length === 0" class="empty-state">
+      <p>Aucun match enregistré</p>
+      <button @click="goToNewMatch" class="btn primary">
+        Créer mon premier match
+      </button>
+    </div>
+    
     <ul v-else class="matches-list">
       <li v-for="match in matches" :key="match.id" class="match-item">
-        <div>
-          <h3>{{ match.activity }} - {{ formatDate(match.startedAt) }}</h3>
-          <p>{{ match.team1 }} {{ match.team1Score }} - {{ match.team2Score }} {{ match.team2 }}</p>
+        <div class="match-info">
+          <h3>
+            <i class="sport-icon" :class="getSportIcon(match.activity)"></i>
+            {{ match.activity }}
+          </h3>
+          <p class="match-date">{{ formatDate(match.startedAt) }}</p>
+          <p class="match-score">
+            {{ match.team1 }} {{ match.team1Score }} - {{ match.team2Score }} {{ match.team2 }}
+          </p>
         </div>
-        <button @click="deleteMatch(match.id)" class="btn danger">Supprimer</button>
+        <div class="match-actions">
+          <button @click="deleteMatchHandler(match.id)" class="btn danger">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
       </li>
     </ul>
   </div>
@@ -22,6 +43,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { getMyMatches, deleteMatch } from '../api/matches';
 import { useAuth } from '../composables/useAuth';
+import '../assets/style/GamesView.css';
 
 const { user } = useAuth();
 const router = useRouter();
@@ -40,7 +62,21 @@ onMounted(async () => {
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return date.toLocaleDateString('fr-FR', { 
+    weekday: 'long', 
+    day: 'numeric', 
+    month: 'long',
+    hour: '2-digit', 
+    minute: '2-digit' 
+  });
+};
+
+const getSportIcon = (activity) => {
+  const activityLower = activity.toLowerCase();
+  if (activityLower.includes('foot')) return 'fas fa-futbol';
+  if (activityLower.includes('basket')) return 'fas fa-basketball-ball';
+  if (activityLower.includes('tennis')) return 'fas fa-table-tennis';
+  return 'fas fa-trophy';
 };
 
 const goToNewMatch = () => {
