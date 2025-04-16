@@ -116,6 +116,7 @@
   box-shadow: var(--shadow-medium);
   margin-top: 0.25rem;
   overflow: hidden;
+  z-index: 1010;
 }
 
 .dropdown-enter-active,
