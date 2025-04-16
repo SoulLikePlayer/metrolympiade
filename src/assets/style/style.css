@@ -45,6 +45,9 @@
   /* Tailles */
   --width-container: 1200px;
   --width-sidebar: 250px;
+
+  /*Effet parralax*/
+  --parralax-vh: 5vh;
 }
 
 /* ============================= */
