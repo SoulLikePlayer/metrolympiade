@@ -12,7 +12,7 @@ const routes = [
   { path: "/", component: HomeView },
   { path: "/login", component: LoginView },
   { path: "/register", component: RegisterView },
-  { path: "/ranking", component: RankingView },
+  { path: "/leaderboard", component: RankingView },
   { path: "/team", component: TeamView, meta: { requiresAuth: true } },
   { path: "/games", component: GamesView, meta: { requiresAuth: true } },
   { path: "/game", component: GameView, meta: { requiresAuth: true } },
