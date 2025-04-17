@@ -1,37 +1,53 @@
 import { ref, computed } from "vue";
 import { login, register, logout } from "../api/auth";
 
-const user = ref(JSON.parse(localStorage.getItem("user")) || null);
+const user = ref(getStoredUser());
+
+function getStoredUser() {
+  return JSON.parse(localStorage.getItem("user")) || null;
+}
+
+function saveUser(data) {
+  user.value = data;
+  localStorage.setItem("user", JSON.stringify(data));
+}
+
+function clearUser() {
+  user.value = null;
+  localStorage.removeItem("user");
+}
+
+async function authenticate(action, payload, callback) {
+  try {
+    const data = await action(payload);
+    saveUser(data);
+    callback?.(null, data);
+  } catch (error) {
+    callback?.(error, null);
+  }
+}
+
+function loginUser(credentials, callback) {
+  return authenticate(login, credentials, callback);
+}
+
+function registerUser(userData, callback) {
+  return authenticate(register, userData, callback);
+}
+
+function logoutUser() {
+  logout();
+  clearUser();
+}
+
+const isAuthenticated = computed(() => !!user.value);
 
 export function useAuth() {
-  const isAuthenticated = computed(() => !!user.value);
-
-  const loginUser = async (credentials, callback) => {
-    try {
-      const data = await login(credentials);
-      user.value = data;
-      localStorage.setItem("user", JSON.stringify(data));
-      if (callback) callback(null, data);
-    } catch (error) {
-      if (callback) callback(error, null);
-    }
+  return {
+    user,
+    isAuthenticated,
+    loginUser,
+    registerUser,
+    logoutUser,
   };
-
-  const registerUser = async (userData, callback) => {
-    try {
-        const data = await register(userData); 
-        user.value = data;
-        localStorage.setItem("user", JSON.stringify(data)); 
-        if (callback) callback(null, data); 
-    } catch (error) {
-        if (callback) callback(error, null);
-    }
-    };
-
-  const logoutUser = () => {
-    logout();
-    user.value = null;
-  };
-
-  return { user, isAuthenticated, loginUser, registerUser, logoutUser };
 }
