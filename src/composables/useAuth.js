@@ -8,7 +8,7 @@ function getStoredUser() {
 }
 
 function saveUser(data) {
-  user.value = data;
+  user.value = data; 
   localStorage.setItem("user", JSON.stringify(data));
 }
 
