@@ -50,7 +50,7 @@ const toggleSidebar = () => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 100;
   transition: left 0.3s ease;
 }
 

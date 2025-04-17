@@ -116,7 +116,7 @@
   box-shadow: var(--shadow-medium);
   margin-top: 0.25rem;
   overflow: hidden;
-  z-index: 1010;
+  z-index: 1000 !important;
 }
 
 .dropdown-enter-active,
@@ -161,7 +161,6 @@
   background-color: rgba(220, 53, 69, 0.1) !important;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .header {
     width: 100%;
