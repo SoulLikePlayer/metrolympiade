@@ -1,39 +1,13 @@
-import axios from 'axios';
+import { createApiRequest } from "./apiRequest";
 
-const API_URL = 'http://localhost:3000';
+export const getMyTeam = (token) =>
+  createApiRequest('get', '/teams/me', null, token);
 
-export const getMyTeam = async (token) => {
-  const response = await axios.get(`${API_URL}/teams/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-  return response.data;
-};
+export const createTeam = (teamData, token) =>
+  createApiRequest('post', '/teams', teamData, token);
 
-export const createTeam = async (teamData, token) => {
-  const response = await axios.post(`${API_URL}/teams`, teamData, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-  return response.data;
-};
+export const updateTeam = (teamData, token) =>
+  createApiRequest('put', '/teams/me', teamData, token);
 
-export const updateTeam = async (teamData, token) => {
-  const response = await axios.put(`${API_URL}/teams/me`, teamData, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-  return response.data;
-};
-
-export const getAllTeams = async (token) => {
-  const response = await axios.get(`${API_URL}/teams`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-  return response.data;
-};
+export const getAllTeams = (token) =>
+  createApiRequest('get', '/teams', null, token);

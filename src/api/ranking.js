@@ -1,8 +1,4 @@
-import axios from 'axios';
+import { createApiRequest } from "./apiRequest";
 
-const API_URL = 'http://localhost:3000';
-
-export const getRanking = async () => {
-  const response = await axios.get(`${API_URL}/ranking`);
-  return response.data;
-};
+export const getRanking = () =>
+  createApiRequest('get', '/ranking');

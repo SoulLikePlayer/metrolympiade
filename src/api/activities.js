@@ -1,8 +1,4 @@
-import axios from 'axios';
+import { createApiRequest } from "./apiRequest";
 
-const API_URL = 'http://localhost:3000';
-
-export const getActivities = async () => {
-  const response = await axios.get(`${API_URL}/activities`);
-  return response.data;
-};
+export const getActivities = () =>
+  createApiRequest('get', '/activities');
