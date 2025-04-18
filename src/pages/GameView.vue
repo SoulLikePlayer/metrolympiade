@@ -2,22 +2,25 @@
   <div class="container">
     <form @submit.prevent="submitMatch" class="game-form">
       <h1>Nouveau match</h1>
-      
+
       <div class="sport-theme" :class="currentSportTheme">
         <h2>{{ currentActivityName || 'Nouvelle compétition' }}</h2>
         <p v-if="currentActivityName">Prêt pour le match ?</p>
       </div>
-      
+
       <div class="form-group">
         <label>Activité</label>
-        <select v-model="form.activityId" required @change="updateSportTheme">
+        <select v-model="form.activityId" required @change="handleActivityChange">
           <option value="">Sélectionnez une activité</option>
           <option v-for="activity in activities" :key="activity.id" :value="activity.id">
             {{ activity.name }}
           </option>
+          <option value="create">
+            &#xf067; Créer une nouvelle activité
+          </option>
         </select>
       </div>
-      
+
       <div class="form-group">
         <label>Adversaire</label>
         <select v-model="form.team2Id" required>
@@ -27,29 +30,26 @@
           </option>
         </select>
       </div>
-      
+
       <div class="form-group">
         <label>Heure de début</label>
-        <input type="datetime-local"
-         v-model="form.startedAt" 
-         :max="todayDate"
-         required>
+        <input type="datetime-local" v-model="form.startedAt" :max="todayDate" required>
       </div>
-      
+
       <div class="score-inputs">
         <div class="form-group">
           <label>Mon équipe</label>
           <input type="number" v-model="form.team1Score" min="0" required>
         </div>
-        
+
         <div class="vs">VS</div>
-        
+
         <div class="form-group">
           <label>Adversaire</label>
           <input type="number" v-model="form.team2Score" min="0" required>
         </div>
       </div>
-      
+
       <button type="submit" class="btn primary submit-btn">Enregistrer le match</button>
     </form>
   </div>
@@ -59,7 +59,7 @@
 import { ref, onMounted, watch, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { createMatch } from '../api/matches';
-import { getActivities } from '../api/activities';
+import { getActivities, createActivites } from '../api/activities';
 import { getAllTeams } from '../api/teams';
 import { useAuth } from '../composables/useAuth';
 import "../assets/style/GameView.css";
@@ -81,8 +81,6 @@ const teams = ref([]);
 const loading = ref(true);
 const todayDate = new Date().toISOString().slice(0, 16);
 
-console.log(todayDate)
-
 const currentActivityName = computed(() => {
   const activity = activities.value.find(a => a.id === form.value.activityId);
   return activity ? activity.name : '';
@@ -91,13 +89,8 @@ const currentActivityName = computed(() => {
 const currentSportTheme = computed(() => {
   if (!currentActivityName.value) return 'default-sport-theme';
   const activity = currentActivityName.value.toLowerCase();
-  
-  if (activity.includes('foot') || activity.includes('soccer')) return 'football-theme';
-  if (activity.includes('basket')) return 'basketball-theme';
-  if (activity.includes('tennis')) return 'tennis-theme';
   return 'default-sport-theme';
 });
-
 
 watch(() => form.value.team2Id, (newVal) => {
   console.log('team2Id updated:', newVal);
@@ -112,7 +105,6 @@ watch(
   },
   { immediate: true }
 );
-
 
 onMounted(async () => {
   try {
@@ -132,8 +124,26 @@ onMounted(async () => {
   }
 });
 
+const handleActivityChange = async () => {
+  if (form.value.activityId === 'create') {
+    const newActivityName = prompt("Nom du nouveau sport :");
+
+    if (newActivityName) {
+      try {
+        const newActivity = await createActivites({ name: newActivityName });
+        activities.value.push(newActivity);
+        form.value.activityId = newActivity.id;
+      } catch (error) {
+        alert("Erreur lors de la création de l'activité.");
+        form.value.activityId = '';
+      }
+    } else {
+      form.value.activityId = '';
+    }
+  }
+};
+
 const submitMatch = async () => {
-  console.log('Données envoyées:', form.value);
   if (!form.value.team2Id) {
     alert('Veuillez sélectionner un adversaire');
     return;
@@ -143,10 +153,8 @@ const submitMatch = async () => {
     setTimeout(() => {
       router.push('/games');
     }, 0);
-
   } catch (error) {
     console.error('Error creating match:', error);
   }
 };
-
 </script>

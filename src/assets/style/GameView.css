@@ -61,35 +61,11 @@
   margin-top: var(--spacing-md);
 }
 
-.football-theme {
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                    url('https://images.unsplash.com/photo-1574629810360-7efbbe195018');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: var(--parralax-vh);
+option[value="create"] {
+  font-style: italic;
+  color: #16a34a; 
 }
 
-.basketball-theme {
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                    url('https://images.unsplash.com/photo-1546519638-68e109498ffc');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: var(--parralax-vh);
-}
-
-.tennis-theme {
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                    url('https://images.unsplash.com/photo-1554068865-24cecd4e34b8');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: var(--parralax-vh);
-}
 
 .default-sport-theme {
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 

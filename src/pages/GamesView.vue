@@ -20,7 +20,7 @@
       <li v-for="match in matches" :key="match.id" class="match-item">
         <div class="match-info">
           <h3>
-            <i class="sport-icon" :class="getSportIcon(match.activity)"></i>
+            <i class="sport-icon fas fa-trophy"></i>
             {{ match.activity }}
           </h3>
           <p class="match-date">{{ formatDate(match.startedAt) }}</p>
@@ -68,14 +68,6 @@ const formatDate = (dateString) => {
     hour: '2-digit', 
     minute: '2-digit' 
   });
-};
-
-const getSportIcon = (activity) => {
-  const activityLower = activity.toLowerCase();
-  if (activityLower.includes('foot')) return 'fas fa-futbol';
-  if (activityLower.includes('basket')) return 'fas fa-basketball-ball';
-  if (activityLower.includes('tennis')) return 'fas fa-table-tennis';
-  return 'fas fa-trophy';
 };
 
 const goToNewMatch = () => {
