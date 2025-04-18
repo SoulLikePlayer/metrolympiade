@@ -1,11 +1,16 @@
 <template>
   <div id="app" class="layout">
-    <div class="toggle-sidebar" @click="toggleSidebar">
-      <i :class="sidebarCollapsed ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-left'"></i>
-    </div>
     <aside class="sidebar" :class="{ 'collapsed': sidebarCollapsed }">
       <Header />
     </aside>
+
+    <div
+      class="toggle-sidebar"
+      @click="toggleSidebar"
+      :class="{ 'collapsed': sidebarCollapsed }"
+    >
+      <i :class="sidebarCollapsed ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-left'"></i>
+    </div>
 
     <div class="content-wrapper" :class="{ 'expanded': sidebarCollapsed }">
       <main class="main-content">
@@ -15,6 +20,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { RouterView } from 'vue-router';
@@ -30,3 +36,4 @@ const toggleSidebar = () => {
   sidebarCollapsed.value = !sidebarCollapsed.value;
 };
 </script>
+
