@@ -1,4 +1,3 @@
-/* GamesView.css */
 .matches-header {
   display: flex;
   justify-content: space-between;
@@ -13,52 +12,8 @@
   gap: var(--spacing-md);
 }
 
-.match-item {
-  background-color: var(--bg-light);
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-light);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.match-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
-.match-info h3 {
-  margin: 0 0 var(--spacing-xs) 0;
-  color: var(--primary-color);
-}
-
-.match-score {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--text-color);
-}
-
-.match-date {
-  color: var(--text-light);
-  font-size: 0.9rem;
-}
-
-.match-actions {
-  display: flex;
-  gap: var(--spacing-sm);
-}
-
 .empty-state {
   text-align: center;
   padding: var(--spacing-xl) 0;
   color: var(--text-light);
-}
-
-.sport-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: var(--spacing-sm);
-  vertical-align: middle;
 }

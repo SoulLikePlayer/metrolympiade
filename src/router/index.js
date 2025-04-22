@@ -3,6 +3,7 @@ import HomeView from "../pages/HomeView.vue";
 import LoginView from "../pages/LoginView.vue";
 import RegisterView from "../pages/RegisterView.vue";
 import TeamView from "../pages/TeamView.vue";
+import TeamInformation from "../pages/TeamInformation.vue";
 import GamesView from "../pages/GamesView.vue";
 import GameView from "../pages/GameView.vue";
 import RankingView from "../pages/RankingView.vue";
@@ -17,6 +18,7 @@ const routes = [
   { path: "/games", component: GamesView, meta: { requiresAuth: true } },
   { path: "/game", component: GameView, meta: { requiresAuth: true } },
   { path: "/game/:id", component: GameView, meta: { requiresAuth: true } },
+  { path: "/team/:id", component: TeamInformation}
 ];
 
 const router = createRouter({

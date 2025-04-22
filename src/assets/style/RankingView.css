@@ -88,3 +88,13 @@
   color: var(--text-light);
   font-style: italic;
 }
+
+.team-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.team-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

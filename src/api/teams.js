@@ -11,3 +11,6 @@ export const updateTeam = (teamData, token) =>
 
 export const getAllTeams = (token) =>
   createApiRequest('get', '/teams', null, token);
+
+export const getTeamById = (teamId, token) =>
+  createApiRequest('get', `/teams/${teamId}`, null, token);

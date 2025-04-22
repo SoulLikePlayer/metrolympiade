@@ -17,22 +17,12 @@
     </div>
     
     <ul v-else class="matches-list">
-      <li v-for="match in matches" :key="match.id" class="match-item">
-        <div class="match-info">
-          <h3>
-            <i class="sport-icon fas fa-trophy"></i>
-            {{ match.activity }}
-          </h3>
-          <p class="match-date">{{ formatDate(match.startedAt) }}</p>
-          <p class="match-score"> {{ match.team1 }} - {{ match.team1Score }} : {{ match.team2Score }} - {{ match.team2 }}
-          </p>
-        </div>
-        <div class="match-actions">
-          <button @click="deleteMatchHandler(match.id)" class="btn danger">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </li>
+      <MatchCard
+        v-for="match in matches"
+        :key="match.id"
+        :match="match"
+        @delete="deleteMatchHandler"
+      />
     </ul>
   </div>
 </template>
@@ -42,6 +32,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { getMyMatches, deleteMatch } from '../api/matches';
 import { useAuth } from '../composables/useAuth';
+import MatchCard from '../components/MatchCard.vue';
 import '../assets/style/GamesView.css';
 
 const { user } = useAuth();
@@ -58,17 +49,6 @@ onMounted(async () => {
     loading.value = false;
   }
 });
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('fr-FR', { 
-    weekday: 'long', 
-    day: 'numeric', 
-    month: 'long',
-    hour: '2-digit', 
-    minute: '2-digit' 
-  });
-};
 
 const goToNewMatch = () => {
   router.push('/game');

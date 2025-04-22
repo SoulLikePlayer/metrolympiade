@@ -8,3 +8,6 @@ export const getMyMatches = (token) =>
 
 export const deleteMatch = (matchId, token) =>
   createApiRequest('delete', `/matches/${matchId}`, null, token);
+
+export const getMatchesByTeam = (teamId, token) =>
+  createApiRequest('get', `/matches?teamId=${teamId}`, null, token);
