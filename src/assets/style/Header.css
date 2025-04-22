@@ -163,50 +163,31 @@
 
 @media (max-width: 768px) {
   .header {
-    width: 100%;
-    height: auto;
-    position: static;
-    transform: translateX(-100%);
-  }
-
-  .header.active {
-    transform: translateX(0);
+    width: 280px;
+    height: 100vh;
+    position: relative;
+    transform: none;
+    z-index: inherit;
   }
 
   .header nav {
-    height: auto;
     padding: 1rem;
-  }
-
-  .logo {
-    margin-bottom: 1rem;
+    height: 100%;
   }
 
   .nav-link, .dropdown-toggle {
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
   }
 
   .link-text {
-    display: none;
+    display: inline-block;
   }
 
   .dropdown-menu {
     position: static;
     box-shadow: none;
-  }
-}
-
-.toggle-sidebar {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .toggle-sidebar {
-    display: flex;
-  }
-  
-  .sidebar:not(.collapsed) {
-    position: fixed;
-    z-index: 999;
+    margin-left: 1rem;
+    width: calc(100% - 2rem);
   }
 }

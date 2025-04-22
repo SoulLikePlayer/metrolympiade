@@ -18,18 +18,17 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 100;
+  z-index: 1000; 
   transition: left 0.3s ease;
 }
 
 .toggle-sidebar {
-  left: 280px; 
+  left: 280px;
 }
 
 .sidebar.collapsed + .toggle-sidebar {
   left: 0;
 }
-
 
 .toggle-sidebar:hover {
   background-color: #e8e8e8;
@@ -46,6 +45,7 @@
   position: sticky;
   top: 0;
   transition: transform 0.3s ease, width 0.3s ease;
+  z-index: 900; /* Ajouté pour la superposition */
 }
 
 .sidebar.collapsed {
@@ -80,4 +80,26 @@ footer {
   text-align: center;
   background-color: #f1f1f1;
   border-top: 1px solid #ddd;
+}
+
+/* Styles spécifiques pour mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    z-index: 800;
+    width: 280px;
+  }
+  
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+  
+  .content-wrapper {
+    width: 100%;
+  }
+  
+  .toggle-sidebar {
+    display: flex;
+    z-index: 1000;
+  }
 }

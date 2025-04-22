@@ -43,7 +43,7 @@
         <p v-else>Aucun match trouvé pour cette équipe.</p>
       </div>
 
-      <router-link to="/ranking" class="back-link">← Retour au classement</router-link>
+      <router-link to="/leaderboard" class="back-link">← Retour au classement</router-link>
     </div>
   </div>
 </template>
