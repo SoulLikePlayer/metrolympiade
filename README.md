@@ -15,8 +15,6 @@ Avant de foncer tête baissée dans le code comme un rugbyman sur son essai, voi
 cd src/api  
 git clone https://github.com/ClementCatel/metrolympiades-api
 
-➡️ N'oublie pas de lancer cette API en local pour que ton frontend puisse s'y connecter correctement.
-
 ---
 
 ## 🚀 Fonctionnalités principales
