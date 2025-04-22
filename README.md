@@ -12,8 +12,10 @@ Avant de foncer tête baissée dans le code comme un rugbyman sur son essai, voi
 
 📁 Chemin :
 
+```bash
 cd src/api  
 git clone https://github.com/ClementCatel/metrolympiades-api
+```
 
 ---
 
@@ -73,10 +75,13 @@ Voici les ingrédients secrets de notre potion magique :
 
 ## 🚚 Lancer le projet
 
-Installe les dépendances puis lance le tout avec :
+lance le tout avec :
 
+```
+npm run setup
 npm install  
 npm run dev
+```
 
 🪄 Et magie... tout tourne comme sur des roulettes !
 
@@ -88,8 +93,8 @@ Tu veux apporter ta pierre à l’édifice sportif ? Go for it !
 
 - Fork 💻  
 - Code 👨‍💻  
-- Commit 🔒 (avec des messages clairs et des gitmojis svp 😘)  
-- PR 🚀
+- Commit 🔒
+- Pull Request 🚀
 
 ---
 
