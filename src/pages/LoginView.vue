@@ -1,10 +1,26 @@
 <template>
-  <div class="auth-container">
+  <div class="auth-container login-style">
     <h2>Connexion</h2>
     <form @submit.prevent="handleLogin">
-      <input v-model="email" type="email" placeholder="Email" required />
-      <input v-model="password" type="password" placeholder="Mot de passe" required />
+      <div class="form-control">
+        <input v-model="email" type="email" required placeholder=" " />
+        <label>
+          <span v-for="(char, i) in 'Email'" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <input v-model="password" type="password" required placeholder=" " />
+        <label>
+          <span v-for="(char, i) in 'Mot de passe'" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+        </label>
+      </div>
+
       <button type="submit">Se connecter</button>
+      <p class="link-text">
+        Pas encore de compte ?
+        <router-link to="/register">Créer un compte</router-link>
+      </p>
     </form>
   </div>
 </template>
@@ -13,6 +29,8 @@
 import { ref } from "vue";
 import { useAuth } from "../composables/useAuth";
 import { useRouter } from "vue-router";
+import "../assets/style/Auth.css";
+
 
 const email = ref("");
 const password = ref("");
