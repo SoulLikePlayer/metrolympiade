@@ -16,7 +16,7 @@
           <td class="rank-cell">{{ index + 1 }}</td>
           <td class="team-cell">
             <router-link
-              v-if="team.id"
+              v-if="team.id" 
               :to="`/team/${encodeURIComponent(team.id)}`"
               class="team-link"
             >
@@ -46,25 +46,31 @@ const { user } = useAuth();
 
 onMounted(async () => {
   try {
-    const [rankingData, teamsData] = await Promise.all([
-      getRanking(),
-      getAllTeams(user.value.token)
-    ]);
-
+    // On fait d'abord la récupération du classement, même si l'utilisateur n'est pas connecté
+    const rankingData = await getRanking();
     ranking.value = rankingData;
-    allTeams.value = teamsData;
 
-    console.log(allTeams);
-    enrichedRanking.value = ranking.value.map((teamRank) => {
-      const match = allTeams.value.find(t => t.name === teamRank.team);
-      return {
+    // Si l'utilisateur est connecté, on fait la récupération des équipes
+    if (user.value?.token) {
+      const teamsData = await getAllTeams(user.value?.token);
+      allTeams.value = teamsData;
+      
+      enrichedRanking.value = ranking.value.map((teamRank) => {
+        const match = allTeams.value.find(t => t.name === teamRank.team);
+        return {
+          name: teamRank.team,
+          points: teamRank.points,
+          id: match ? match.id : null
+        };
+      });
+    } else {
+      enrichedRanking.value = ranking.value.map((teamRank) => ({
         name: teamRank.team,
         points: teamRank.points,
-        id: match ? match.id : null
-      };
-    });
-        
-
+        id: null  
+      }));
+    }
+    
   } catch (error) {
     console.error('Error fetching ranking or teams:', error);
   } finally {
