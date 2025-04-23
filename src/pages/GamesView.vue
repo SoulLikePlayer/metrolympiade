@@ -21,6 +21,7 @@
         v-for="match in matches"
         :key="match.id"
         :match="match"
+        :canDelete="true"
         @delete="deleteMatchHandler"
       />
     </ul>

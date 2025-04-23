@@ -10,10 +10,8 @@
         {{ match.team1 }} - {{ match.team1Score }} : {{ match.team2Score }} - {{ match.team2 }}
       </p>
     </div>
-    <div class="match-actions">
-      <button @click="$emit('delete', match.id)" class="btn danger">
-        <i class="fas fa-trash"></i>
-      </button>
+    <div class="match-actions" v-if="canDelete">
+      <DeleteButton @click="$emit('delete', match.id)" />
     </div>
   </li>
 </template>
@@ -22,6 +20,8 @@
 import { computed } from 'vue';
 import { useAuth } from '../composables/useAuth';
 import '../assets/style/MatchCard.css';
+import DeleteButton from '../composables/DeleteButton.vue';
+
 
 const user = useAuth();
 
@@ -29,6 +29,10 @@ const props = defineProps({
   match: {
     type: Object,
     required: true
+  },
+  canDelete: {
+    type: Boolean,
+    default: false
   }
 });
 
