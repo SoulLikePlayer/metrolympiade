@@ -2,32 +2,44 @@
   <div class="auth-container register-style">
     <h2>Inscription</h2>
     <form @submit.prevent="handleRegister">
-      <div class="form-control">
-        <input v-model="username" type="text" required placeholder=" " />
-        <label>
-          <span v-for="(char, i) in `Nom d'utilisateur`" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+      <div class="wave-group">
+        <input v-model="username" type="text" required class="input" placeholder=" " />
+        <label class="label">
+          <span v-for="(char, i) in `Nom d'utilisateur`.split('')" :key="i" class="label-char" :style="{ '--index': i }">
+            {{ char === ' ' ? '\u00A0' : char }}
+          </span>
         </label>
+        <span class="bar"></span>
       </div>
 
-      <div class="form-control">
-        <input v-model="email" type="email" required placeholder=" " />
-        <label>
-          <span v-for="(char, i) in 'Email'" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+      <div class="wave-group">
+        <input v-model="email" type="email" required class="input" placeholder=" " />
+        <label class="label">
+          <span v-for="(char, i) in 'Email'.split('')" :key="i" class="label-char" :style="{ '--index': i }">
+            {{ char }}
+          </span>
         </label>
+        <span class="bar"></span>
       </div>
 
-      <div class="form-control">
-        <input v-model="password" type="password" required placeholder=" " />
-        <label>
-          <span v-for="(char, i) in 'Mot de passe'" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+      <div class="wave-group">
+        <input v-model="password" type="password" required class="input" placeholder=" " />
+        <label class="label">
+          <span v-for="(char, i) in 'Mot de passe'.split('')" :key="i" class="label-char" :style="{ '--index': i }">
+            {{ char === ' ' ? '\u00A0' : char }}
+          </span>
         </label>
+        <span class="bar"></span>
       </div>
 
-      <div class="form-control">
-        <input v-model="teamName" type="text" required placeholder=" " />
-        <label>
-          <span v-for="(char, i) in `Nom de l'équipe`" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+      <div class="wave-group">
+        <input v-model="teamName" type="text" required class="input" placeholder=" " />
+        <label class="label">
+          <span v-for="(char, i) in `Nom de l'équipe`.split('')" :key="i" class="label-char" :style="{ '--index': i }">
+            {{ char === ' ' ? '\u00A0' : char }}
+          </span>
         </label>
+        <span class="bar"></span>
       </div>
 
       <button type="submit">Créer un compte</button>
@@ -38,6 +50,7 @@
     </form>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from "vue";

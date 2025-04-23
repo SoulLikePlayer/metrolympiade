@@ -2,18 +2,24 @@
   <div class="auth-container login-style">
     <h2>Connexion</h2>
     <form @submit.prevent="handleLogin">
-      <div class="form-control">
-        <input v-model="email" type="email" required placeholder=" " />
-        <label>
-          <span v-for="(char, i) in 'Email'" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+      <div class="wave-group">
+        <input v-model="email" type="email" required class="input" placeholder=" "/>
+        <label class="label">
+          <span v-for="(char, i) in 'Email'":key="i" class="label-char" :style="{ '--index': i }">
+            {{ char }}
+          </span>
         </label>
+        <span class="bar"></span>
       </div>
 
-      <div class="form-control">
-        <input v-model="password" type="password" required placeholder=" " />
-        <label>
-          <span v-for="(char, i) in 'Mot de passe'" :key="i" :style="{ transitionDelay: `${i * 50}ms` }">{{ char }}</span>
+      <div class="wave-group">
+        <input v-model="password" type="password" required class="input" placeholder=" "/>
+        <label class="label">
+          <span v-for="(char, i) in 'Mot de passe'.split('')" :key="i" class="label-char" :style="{ '--index': i }">
+            {{ char === ' ' ? '\u00A0' : char }}
+          </span>
         </label>
+        <span class="bar"></span>
       </div>
 
       <button type="submit">Se connecter</button>
