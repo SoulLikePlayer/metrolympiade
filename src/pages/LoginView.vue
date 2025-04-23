@@ -16,7 +16,7 @@
         </label>
       </div>
 
-      <button type="submit">Se connecter</button>
+      <button class="submit-btn" type="submit">Se connecter</button>
       <p class="link-text">
         Pas encore de compte ?
         <router-link to="/register">Créer un compte</router-link>

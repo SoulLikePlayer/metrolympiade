@@ -30,7 +30,7 @@
         </label>
       </div>
 
-      <button type="submit">Créer un compte</button>
+     <button class="submit-btn" type="submit">Enregistrer mon équipe</button>
       <p class="link-text">
         Déjà un compte ?
         <router-link to="/login">Se connecter</router-link>

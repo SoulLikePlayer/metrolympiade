@@ -1,4 +1,5 @@
 .auth-container {
+  position: relative;
   max-width: 400px;
   margin: 80px auto;
   padding: var(--spacing-lg);
@@ -83,4 +84,28 @@ button:hover {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
+}
+
+.submit-btn {
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  border-radius: 30px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #0f0092;
+  color: #FFF;
+  padding: 12px 25px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: -5px 6px 20px 0px rgba(26, 26, 26, 0.4);
+  border: none;
+}
+
+.submit-btn:hover {
+  background-color: #07013d;
+  box-shadow: -5px 6px 20px 0px rgba(88, 88, 88, 0.569);
 }
