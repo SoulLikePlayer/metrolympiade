@@ -1,6 +1,8 @@
 <template>
   <div class="team-information container fade-in">
-    <div v-if="loading" class="loading-state">Chargement des informations...</div>
+    <div v-if="loading" class="loading-state">
+      <Loader />
+    </div>
 
     <div v-else-if="!team" class="not-found">
       <h2>Équipe introuvable</h2>
@@ -56,6 +58,7 @@ import { getTeamById } from '../api/teams';
 import { getMatchesByTeam } from '../api/matches';
 import MatchCard from '../components/MatchCard.vue';
 import { LucideCrown, LucideUsers, LucideUser } from 'lucide-vue-next';
+import Loader from '../components/Loader.vue'; // <= Import Loader ici
 import '../assets/style/TeamInformation.css';
 import '../assets/style/GamesView.css';
 

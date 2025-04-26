@@ -66,9 +66,15 @@ const { registerUser } = useAuth();
 const router = useRouter();
 
 const handleRegister = () => {
+  if (!username.value.trim() || !email.value.trim() || !password.value.trim() || !teamName.value.trim()) {
+    alert("Veuillez remplir tous les champs avant de vous inscrire.");
+    return;
+  }
+
   registerUser({ username: username.value, email: email.value, password: password.value, teamName: teamName.value }, (error, data) => {
     if (!error) router.push("/");
     else console.error("Erreur d'inscription", error);
   });
 };
+
 </script>

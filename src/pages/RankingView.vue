@@ -1,9 +1,11 @@
 <template>
   <div class="ranking-view">
-    <h1>Classement général</h1>
-
-    <div v-if="loading" class="loading-state">Chargement en cours...</div>
-    <table v-else class="ranking-table">
+    <div v-if="loading" class="loading-state">
+      <Loader />
+    </div>
+    <div v-else class="ranking-table">
+        <h1>Classement général</h1>
+        <table class="ranking-table">
       <thead>
         <tr>
           <th class="rank-cell">#</th>
@@ -28,6 +30,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
@@ -36,6 +39,7 @@ import { ref, onMounted } from 'vue';
 import { getRanking } from '../api/ranking';
 import { getAllTeams } from '../api/teams';
 import { useAuth } from '../composables/useAuth';
+import Loader from '../components/Loader.vue'
 import '../assets/style/RankingView.css';
 
 const ranking = ref([]);
@@ -46,11 +50,9 @@ const { user } = useAuth();
 
 onMounted(async () => {
   try {
-    // On fait d'abord la récupération du classement, même si l'utilisateur n'est pas connecté
     const rankingData = await getRanking();
     ranking.value = rankingData;
 
-    // Si l'utilisateur est connecté, on fait la récupération des équipes
     if (user.value?.token) {
       const teamsData = await getAllTeams(user.value?.token);
       allTeams.value = teamsData;

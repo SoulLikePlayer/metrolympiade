@@ -7,7 +7,9 @@
       </button>
     </div>
     
-    <div v-if="loading" class="loading">Chargement...</div>
+    <div v-if="loading" class="loading">
+      <Loader />
+    </div>
     
     <div v-else-if="matches.length === 0" class="empty-state">
       <p>Aucun match enregistré</p>
@@ -34,6 +36,7 @@ import { useRouter } from 'vue-router';
 import { getMyMatches, deleteMatch } from '../api/matches';
 import { useAuth } from '../composables/useAuth';
 import MatchCard from '../components/MatchCard.vue';
+import Loader from '../components/Loader.vue'; // <= Import Loader ici
 import '../assets/style/GamesView.css';
 
 const { user } = useAuth();

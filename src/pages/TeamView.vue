@@ -2,11 +2,12 @@
   <div class="container">
     <h1>Mon équipe</h1>
     
-    <div v-if="loading" class="loading">Chargement...</div>
+    <div v-if="loading" class="loading">
+      <Loader />
+    </div>
     
     <template v-else>
       <div class="form-group">
-       
         <label>Nom de l'équipe</label>
         <input type="text" v-model="team.name" required>
       </div>
@@ -33,6 +34,9 @@ import { ref, onMounted } from 'vue';
 import { getMyTeam, updateTeam, createTeam } from '../api/teams';
 import { useAuth } from '../composables/useAuth';
 import { useRouter } from 'vue-router';
+import Loader from '../components/Loader.vue';
+
+import "../assets/style/TeamView.css";
 
 const { user } = useAuth();
 const router = useRouter();
@@ -46,7 +50,6 @@ const isNewTeam = ref(false);
 onMounted(async () => {
   try {
     const teamData = await getMyTeam(user.value.token);
-    console.log(teamData.id)
     if (teamData) {
       team.value = {
         name: teamData.name || user.value?.teamName || '',
@@ -114,105 +117,3 @@ const saveTeam = async () => {
 };
 </script>
 
-<style scoped>
-.container {
-  max-width: var(--width-container);
-  margin: 0 auto;
-  padding: var(--spacing-lg);
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-light);
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-h1 {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-lg);
-}
-
-.loading {
-  padding: var(--spacing-lg);
-  text-align: center;
-  font-size: 1.2rem;
-  color: var(--text-light);
-}
-
-.form-group {
-  margin-bottom: var(--spacing-lg);
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-color);
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: var(--spacing-sm);
-  border: var(--border-light);
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  margin-bottom: var(--spacing-sm);
-}
-
-input[type="text"]:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: var(--shadow-light);
-}
-
-.empty-message {
-  color: var(--text-light);
-  font-style: italic;
-  margin-bottom: var(--spacing-md);
-}
-
-.member-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-}
-
-button {
-  background-color: var(--primary-color);
-  color: var(--text-inverted);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: background 0.3s ease;
-  font-size: 1rem;
-}
-
-button:hover {
-  background-color: var(--primary-hover);
-}
-
-button.secondary {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-}
-
-button.secondary:hover {
-  background-color: var(--secondary-hover);
-}
-
-button.danger {
-  background-color: var(--error-color);
-}
-
-button.danger:hover {
-  background-color: darkred;
-}
-
-button:focus, input:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-</style>

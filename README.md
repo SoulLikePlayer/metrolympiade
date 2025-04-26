@@ -103,6 +103,7 @@ Tu veux apporter ta pierre à l’édifice sportif ? Go for it !
 - API officielle : https://github.com/ClementCatel/metrolympiades-api  
 - Vue 3 Course : https://github.com/ClementCatel/vue3-course-2025  
 - Cheat Sheet Vue : https://www.vuemastery.com/pdf/Vue-Essentials-Cheat-Sheet.pdf  
+- Site d'animation : https://uiverse.io/
 
 ---
 

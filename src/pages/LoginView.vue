@@ -44,9 +44,15 @@ const { loginUser } = useAuth();
 const router = useRouter();
 
 const handleLogin = () => {
+  if (!email.value.trim() || !password.value.trim()) {
+    alert("Veuillez remplir tous les champs pour vous connecter.");
+    return;
+  }
+
   loginUser({ email: email.value, password: password.value }, (error, data) => {
     if (!error) router.push("/");
     else console.error("Erreur de connexion", error);
   });
 };
+
 </script>
