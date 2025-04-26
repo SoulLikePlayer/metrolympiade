@@ -16,7 +16,7 @@
             {{ activity.name }}
           </option>
           <option value="create">
-            &#xf067; Créer une nouvelle activité
+            + Créer une nouvelle activité
           </option>
         </select>
       </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn primary submit-btn">Enregistrer le match</button>
+      <button type="submit" class="btn primary submit-btn-match">Enregistrer le match</button>
     </form>
   </div>
 </template>

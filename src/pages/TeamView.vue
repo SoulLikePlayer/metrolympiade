@@ -115,41 +115,104 @@ const saveTeam = async () => {
 </script>
 
 <style scoped>
+.container {
+  max-width: var(--width-container);
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+h1 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+}
+
 .loading {
-  padding: 20px;
+  padding: var(--spacing-lg);
   text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: var(--border-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: var(--shadow-light);
 }
 
 .empty-message {
-  color: #666;
+  color: var(--text-light);
   font-style: italic;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-md);
 }
 
 .member-item {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
-.btn {
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
+button {
+  background-color: var(--primary-color);
+  color: var(--text-inverted);
   border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 1rem;
 }
 
-.primary {
-  background-color: #42b983;
-  color: white;
+button:hover {
+  background-color: var(--primary-hover);
 }
 
-.secondary {
-  background-color: #f0f0f0;
+button.secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
 }
 
-.danger {
-  background-color: #ff4444;
-  color: white;
+button.secondary:hover {
+  background-color: var(--secondary-hover);
 }
+
+button.danger {
+  background-color: var(--error-color);
+}
+
+button.danger:hover {
+  background-color: darkred;
+}
+
+button:focus, input:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
 </style>
